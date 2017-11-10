@@ -1,16 +1,16 @@
 
-class player {
+class Player {
 
   constructor() {
-	console.log("hi");
+    console.log("hello");
    }
   load() {
   }
 
-  
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const p = new player();
+  const p = new Player();
   p.load();
 });

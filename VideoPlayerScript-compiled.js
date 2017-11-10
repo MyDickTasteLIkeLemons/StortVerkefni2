@@ -4,23 +4,23 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var player = function () {
-  function player() {
-    _classCallCheck(this, player);
+var Player = function () {
+  function Player() {
+    _classCallCheck(this, Player);
 
-    console.log("hi");
+    console.log("hello");
   }
 
-  _createClass(player, [{
+  _createClass(Player, [{
     key: "load",
     value: function load() {}
   }]);
 
-  return player;
+  return Player;
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  var p = new player();
+  var p = new Player();
   p.load();
 });
 
