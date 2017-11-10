@@ -38,12 +38,18 @@ var VideoContent = function () {
       var h = document.createElement('h1');
       h.classList.add('category__header');
       h.innerHTML = this.categories[id].title;
+      var v = document.createElement('div');
+      v.classList.add('videos');
       s.appendChild(h);
 
       for (var i = 0; i < this.categories[id].videos.length; i += 1) {
         var k = this.categories[id].videos[i] - 1;
-        this.displayVideo(k, s);
+        this.displayVideo(k, v);
       }
+      s.appendChild(v);
+      var cs = document.createElement('div');
+      cs.classList.add('content-seperator');
+      s.appendChild(cs);
       container.appendChild(s);
     }
   }, {
@@ -89,10 +95,54 @@ var VideoContent = function () {
   }, {
     key: 'howLong',
     value: function howLong(x) {
-      var t = Date.now() - x;
-      var days = Math.floor(t / (60 * 60 * 24));
+      var d = new Date();
+      var s = (Date.now() - x) / 1000;
+      var years = Math.floor(s / (365 * 24 * 60 * 60));
+      s %= 365 * 24 * 60 * 60;
+      var months = Math.floor(s / (30 * 24 * 60 * 60));
+      s %= 30 * 24 * 60 * 60;
+      var weeks = Math.floor(s / (7 * 24 * 60 * 60));
+      s %= 7 * 24 * 60 * 60;
+      var days = Math.floor(s / (24 * 60 * 60));
+      s %= 24 * 60 * 60;
+      var hours = Math.floor(s / (60 * 60));
+      s %= 60 * 60;
 
-      return 'Fyrir ' + days + ' d\xF6gum';
+      if (years > 1) {
+        if (this.lastDigit(years) === 1) {
+          return 'Fyrir ' + years + ' \xE1ri';
+        }
+        return 'Fyrir ' + years + ' \xE1rum';
+      }
+      if (months > 1) {
+        if (this.lastDigit(months) === 1) {
+          return 'Fyrir ' + months + ' m\xE1nu\xF0i';
+        }
+        return 'Fyrir ' + months + ' m\xE1nu\xF0um';
+      }
+      if (weeks > 1) {
+        if (this.lastDigit(weeks) === 1) {
+          return 'Fyrir ' + weeks + ' viku';
+        }
+        return 'Fyrir ' + weeks + ' vikum';
+      }
+      if (days > 1) {
+        if (this.lastDigit(days) === 1) {
+          return 'Fyrir ' + days + ' degi';
+        }
+        return 'Fyrir ' + days + ' d\xF6gum';
+      }
+      if (this.lastDigit(hours) === 1) {
+        return 'Fyrir ' + hours + ' klukkustund';
+      }
+      return 'Fyrir ' + hours + ' klukkustundum';
+    }
+  }, {
+    key: 'lastDigit',
+    value: function lastDigit(x) {
+      var str = x.toString();
+      str = str.slice(-1);
+      return parseInt(str, 10);
     }
   }, {
     key: 'loadContent',
@@ -112,6 +162,7 @@ var VideoContent = function () {
         _this.hideLoad();
         var data = JSON.parse(request.response);
         if (request.status >= 200 && request.status < 400) {
+          console.log(data.videos);
           var _ref = [data.categories, data.videos];
           _this.categories = _ref[0];
           _this.videos = _ref[1];
@@ -119,8 +170,9 @@ var VideoContent = function () {
           for (var i = 0; i < _this.categories.length; i += 1) {
             _this.displayCategory(i);
           }
+        } else {
+          _this.showError(data.error);
         }
-        _this.showError(data.error);
       };
       request.onerror = function () {
         _this.showError('Óþekkt villa');
@@ -133,11 +185,9 @@ var VideoContent = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  if (window.location.pathname.split('?')[0] == "/") {
+  var videoContent = new VideoContent();
 
-    var videoContent = new VideoContent();
-    videoContent.loadContent('videos.json');
-  }
+  videoContent.loadContent('videos.json');
 });
 'use strict';
 
