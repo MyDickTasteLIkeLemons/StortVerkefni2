@@ -154,12 +154,19 @@ class VideoContent {
 
 document.addEventListener('DOMContentLoaded', () => {
 	 if(window.location.pathname.split('?')[0] == "/"){
+<<<<<<< HEAD
        const videoContent = new VideoContent();
 	 }
+=======
+  const videoContent = new VideoContent();
+>>>>>>> 96b2dd74f1f2208ebb22096a826e4c258a662ef8
   if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
     videoContent.getJSON('videos.json', false);
   } else {
     videoContent.getJSON('videos.json', true);
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 96b2dd74f1f2208ebb22096a826e4c258a662ef8
 });
