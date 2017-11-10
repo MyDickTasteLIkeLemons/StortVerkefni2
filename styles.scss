@@ -14,41 +14,41 @@ html { /* stylelint-disable-line */
   font-family: helvetica, arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  background-color:#333;
-  color:#fff;
+  color: #fff;
+  background-color: #333;
 }
 
 img { /* stylelint-disable-line */
-  width:100%;
+  width: 100%;
 }
 
 main { /* stylelint-disable-line */
-  width:100%;
-  display:flex;
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   flex-direction: column;
-  margin:0 auto;
-  max-width:1000px;
   @media (max-width: 500px) {
-    max-width:500px;
+    max-width: 500px;
   }
 }
-.content-seperator{
-	width:80%;
-	border-bottom:1px solid #eee;
-	margin:0 auto;
+
+section { /* stylelint-disable-line */
+  padding-bottom: 2em;
 }
 
-section{
-  padding-bottom:2em;
-}
-.category__headder {
-     font-size:2.1em;
-    }
 h1{ /* stylelint-disable-line */
-  padding-top:1em;
-  padding-left:0.5em;
+  padding-top: 1em;
+  padding-left: 0.5em;
 }
 
-@import "nodeScss/video";
-@import "nodeScss/VideoContainer.scss";
+.content-seperator {
+  width: 80%;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+}
+
+.category__headder {
+  font-size: 2.1em;
+}
 @import "nodeScss/video";
