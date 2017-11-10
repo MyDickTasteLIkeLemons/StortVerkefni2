@@ -1,25 +1,36 @@
 <!doctype html>
 <html class="grid" lang="is">
-  <head>
-    <meta charset="utf-8">
-    <title>CrapTube</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="videoContainer">
+
+<head>
+  <meta charset="utf-8">
+  <title>CrapTube</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="videoContainer">
     <h1 class="videoContainer__header">Big Bunny</h1>
-    <video class="videoContainer__video">
+    <div class="videoContainer__videoImg">
+      <video class="videoContainer__video" poster="/videos/bunny.png">
           <source src="videos/bunny.mp4" type="video/mp4">
         No video found
     </video>
-        <div class="videoContainer__menu">
-          <img class="backButton" src="img/back.svg"/>
-          <img class="playButton" src="img/play.svg"/>
-          <img class="muteButton" src="img/mute.svg"/>
-          <img class="fullscreenButton" src="img/fullscreen.svg"/>
-          <img class="nextButton" src="img/next.svg"/>
-        </div>
+      <div class="videoContainer__playOverlay">
+        <img class="videoContainer__playOverlayImage" src="img/play.svg" />
       </div>
-    <script src="VideoPlayerScript-compiled.js"></script>
-  </body>
+    </div>
+    <div class="videoContainer__menu">
+      <img class="backwardButton" src="img/back.svg" />
+      <img class="playButton" src="img/play.svg" />
+      <img class="muteButton" src="img/mute.svg" />
+      <img class="fullscreenButton" src="img/fullscreen.svg" />
+      <img class="forwardButton" src="img/next.svg" />
+    </div>
+  </div>
+  <div class=backButton>
+    <a class=backButton__text href="index.html">Til baka</a>
+  </div>
+  <script src="VideoPlayerScript-compiled.js"></script>
+</body>
+
 </html>
