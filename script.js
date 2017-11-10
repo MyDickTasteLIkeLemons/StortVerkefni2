@@ -67,11 +67,55 @@ class VideoContent {
     return `${mins}:${secs}`;
   }
   howLong(x) {
-    const t = Date.now() - x;
-    const days = Math.floor(t / (60 * 60 * 24));
+    const d = new Date();
+    let s = (Date.now() - x) / 1000;
+    const years = Math.floor(s / (365 * 24 * 60 * 60));
+    s %= (365 * 24 * 60 * 60);
+    const months = Math.floor(s / (30 * 24 * 60 * 60));
+    s %= (30 * 24 * 60 * 60);
+    const weeks = Math.floor(s / (7 * 24 * 60 * 60));
+    s %= (7 * 24 * 60 * 60);
+    const days = Math.floor(s / (24 * 60 * 60));
+    s %= (24 * 60 * 60);
+    const hours = Math.floor(s / (60 * 60));
+    s %= (60 * 60);
 
-    return `Fyrir ${days} dögum`;
+    if (years > 1) {
+      if (this.lastDigit(years) === 1) {
+        return `Fyrir ${years} ári`;
+      }
+      return `Fyrir ${years} árum`;
+    }
+    if (months > 1) {
+      if (this.lastDigit(months) === 1) {
+        return `Fyrir ${months} mánuði`;
+      }
+      return `Fyrir ${months} mánuðum`;
+    }
+    if (weeks > 1) {
+      if (this.lastDigit(weeks) === 1) {
+        return `Fyrir ${weeks} viku`;
+      }
+      return `Fyrir ${weeks} vikum`;
+    }
+    if (days > 1) {
+      if (this.lastDigit(days) === 1) {
+        return `Fyrir ${days} degi`;
+      }
+      return `Fyrir ${days} dögum`;
+    }
+    if (this.lastDigit(hours) === 1) {
+      return `Fyrir ${hours} klukkustund`;
+    }
+    return `Fyrir ${hours} klukkustundum`;
   }
+
+  lastDigit(x) {
+    let str = x.toString();
+    str = str.slice(-1);
+    return parseInt(str, 10);
+  }
+
   loadContent() {
     this.getJSON();
   }
@@ -99,9 +143,7 @@ class VideoContent {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	if(window.location.pathname.split('?')[0] == "/"){
-		
   const videoContent = new VideoContent();
+
   videoContent.loadContent('videos.json');
-	}
 });
