@@ -8,7 +8,11 @@ var Player = function () {
   function Player() {
     _classCallCheck(this, Player);
 
+<<<<<<< HEAD
     console.log("hello");
+=======
+    console.log("hi dwdwd");
+>>>>>>> 598fbd78b3f18ab2717dee0766c4483725f47eb5
   }
 
   _createClass(Player, [{
