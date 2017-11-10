@@ -23,7 +23,8 @@ class Player {
     this.playOverlayButton.addEventListener('click', this.play.bind(this));
   }
   load() {
-    // this.video.play();
+	 const id = window.location.pathname.split('?')[1].split('=')[1];
+	 
   }
 
   play() {
@@ -65,8 +66,7 @@ class Player {
 
 document.addEventListener('DOMContentLoaded', () => {
    if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
-
-  const p = new Player();
-  p.load();
+      const p = new Player();
+      p.load();
   }
 });

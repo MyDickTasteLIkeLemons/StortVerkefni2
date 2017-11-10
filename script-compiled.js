@@ -227,7 +227,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'load',
     value: function load() {
-      // this.video.play();
+      var id = window.location.pathname.split('?')[1].split('=')[1];
     }
   }, {
     key: 'play',
@@ -277,7 +277,6 @@ var Player = function () {
 
 document.addEventListener('DOMContentLoaded', function () {
   if (window.location.pathname.split('?')[0] == "/VideoPage.html") {
-
     var p = new Player();
     p.load();
   }

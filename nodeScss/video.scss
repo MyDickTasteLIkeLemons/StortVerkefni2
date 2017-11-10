@@ -11,16 +11,18 @@
     width: 100%;
     padding-top: 1em;
     font-weight: bold;
+	padding-right: 1em;
+    padding-left: 1em;
     @media (min-width: 501px) {
       display: flex;
       width: 50%;
       flex-direction: column;
     }
-
+    @media (min-width: 1000px) {
+      width: 33%;
+    }
     &__img {
       width: 100%;
-      padding-right: 1em;
-      padding-left: 1em;
     }
 
     &__duration {
@@ -36,11 +38,15 @@
     }
 
     &__info {
-      padding-left: 1em;
       font-size: 1em;
 
       p { /* stylelint-disable-line */
         font-size: 1.2em;
+      }
+
+      h2 {/* stylelint-disable-line */
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }
