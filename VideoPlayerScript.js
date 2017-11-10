@@ -3,12 +3,6 @@ class Player {
     this.isPlaying = false;
     this.isMute = false;
 
-    this.video = document.querySelector('.videoContainer__video');
-
-    this.playOverlay = document.querySelector('.videoContainer__playOverlay');
-
-    this.playOverlayButton = document.querySelector('.videoContainer__playOverlayImage');
-
     this.playButton = document.querySelector('.playButton');
     this.muteButton = document.querySelector('.muteButton');
     this.fullscreenButton = document.querySelector('.fullscreenButton');
@@ -20,11 +14,59 @@ class Player {
     this.fullscreenButton.addEventListener('click', this.fullscreen.bind(this));
     this.forwardButton.addEventListener('click', this.forward.bind(this));
     this.backwardButton.addEventListener('click', this.backward.bind(this));
-    this.playOverlayButton.addEventListener('click', this.play.bind(this));
   }
   load() {
-	 const id = window.location.pathname.split('?')[1].split('=')[1];
-	 
+
+    console.log("loading data");
+
+    const headerText = "Header works";
+    const poster = "/videos/bunny.png";
+    const source = 'videos/bunny.mp4';
+
+    const wrapper = document.querySelector('.videoContainer__wrapper');
+
+    //create header
+    const header = document.createElement('h1');
+    header.className = 'videoContainer__header';
+    const headerNode = document.createTextNode(headerText);
+    header.appendChild(headerNode);
+
+    wrapper.appendChild(header);
+
+    //create videoImg
+    const videoImg = document.createElement('div');
+    videoImg.className = 'videoContainer__videoImg';
+
+    const video = document.createElement('video');
+    video.className = 'videoContainer__video';
+    video.poster = poster;
+
+    const videoSource = document.createElement('source');
+    videoSource.src = source;
+    videoSource.type = "video/mp4";
+
+    video.appendChild(videoSource);
+    videoImg.appendChild(video);
+
+    //create playOverlay
+    const playOverlay = document.createElement('div');
+    playOverlay.className = "videoContainer__playOverlay";
+
+    const playOverlayImage = document.createElement('img');
+    playOverlayImage.className = "videoContainer__playOverlayImage";
+    playOverlayImage.src = "img/play.svg";
+
+    playOverlay.appendChild(playOverlayImage);
+
+    videoImg.appendChild(playOverlay);
+
+    wrapper.appendChild(videoImg);
+
+    this.video = document.querySelector('.videoContainer__video');
+    this.playOverlay = document.querySelector('.videoContainer__playOverlay');
+    this.playOverlayButton = document.querySelector('.videoContainer__playOverlayImage');
+
+    this.playOverlayButton.addEventListener('click', this.play.bind(this));
   }
 
   play() {
@@ -66,7 +108,9 @@ class Player {
 
 document.addEventListener('DOMContentLoaded', () => {
    if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
-      const p = new Player();
-      p.load();
+
+  const p = new Player();
+  p.load();
+  console.log("after load call");
   }
 });
