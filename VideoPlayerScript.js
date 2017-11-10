@@ -23,7 +23,7 @@ class Player {
     this.playOverlayButton.addEventListener('click', this.play.bind(this));
   }
   load() {
-	 const id = window.location.pathname.split('?')[1].split('=')[1];
+	 //const id = window.location.pathname.split('?')[1].split('=')[1];
 	 
   }
 
