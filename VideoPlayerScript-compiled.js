@@ -8,7 +8,7 @@ var player = function () {
   function player() {
     _classCallCheck(this, player);
 
-    console.log("hi");
+    console.log("hi dwdwd");
   }
 
   _createClass(player, [{

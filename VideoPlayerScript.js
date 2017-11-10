@@ -2,7 +2,7 @@
 class player {
 
   constructor() {
-	console.log("hi");
+	console.log("hi dwdwd");
    }
   load() {
   }

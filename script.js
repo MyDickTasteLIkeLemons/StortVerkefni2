@@ -2,7 +2,7 @@
 class MainPage {
 
   constructor() {
-	console.log("hi");
+    console.log("this is a test");
    }
   load() {
   }
