@@ -67,6 +67,9 @@ class Player {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+   if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
+
   const p = new Player();
   p.load();
+  }
 });
