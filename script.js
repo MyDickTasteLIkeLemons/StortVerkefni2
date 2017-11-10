@@ -143,7 +143,9 @@ class VideoContent {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	 if(window.location.pathname.split('?')[0] == "/"){
   const videoContent = new VideoContent();
 
   videoContent.loadContent('videos.json');
+	 }
 });

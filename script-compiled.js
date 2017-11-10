@@ -89,10 +89,54 @@ var VideoContent = function () {
   }, {
     key: 'howLong',
     value: function howLong(x) {
-      var t = Date.now() - x;
-      var days = Math.floor(t / (60 * 60 * 24));
+      var d = new Date();
+      var s = (Date.now() - x) / 1000;
+      var years = Math.floor(s / (365 * 24 * 60 * 60));
+      s %= 365 * 24 * 60 * 60;
+      var months = Math.floor(s / (30 * 24 * 60 * 60));
+      s %= 30 * 24 * 60 * 60;
+      var weeks = Math.floor(s / (7 * 24 * 60 * 60));
+      s %= 7 * 24 * 60 * 60;
+      var days = Math.floor(s / (24 * 60 * 60));
+      s %= 24 * 60 * 60;
+      var hours = Math.floor(s / (60 * 60));
+      s %= 60 * 60;
 
-      return 'Fyrir ' + days + ' d\xF6gum';
+      if (years > 1) {
+        if (this.lastDigit(years) === 1) {
+          return 'Fyrir ' + years + ' \xE1ri';
+        }
+        return 'Fyrir ' + years + ' \xE1rum';
+      }
+      if (months > 1) {
+        if (this.lastDigit(months) === 1) {
+          return 'Fyrir ' + months + ' m\xE1nu\xF0i';
+        }
+        return 'Fyrir ' + months + ' m\xE1nu\xF0um';
+      }
+      if (weeks > 1) {
+        if (this.lastDigit(weeks) === 1) {
+          return 'Fyrir ' + weeks + ' viku';
+        }
+        return 'Fyrir ' + weeks + ' vikum';
+      }
+      if (days > 1) {
+        if (this.lastDigit(days) === 1) {
+          return 'Fyrir ' + days + ' degi';
+        }
+        return 'Fyrir ' + days + ' d\xF6gum';
+      }
+      if (this.lastDigit(hours) === 1) {
+        return 'Fyrir ' + hours + ' klukkustund';
+      }
+      return 'Fyrir ' + hours + ' klukkustundum';
+    }
+  }, {
+    key: 'lastDigit',
+    value: function lastDigit(x) {
+      var str = x.toString();
+      str = str.slice(-1);
+      return parseInt(str, 10);
     }
   }, {
     key: 'loadContent',
@@ -134,8 +178,8 @@ var VideoContent = function () {
 
 document.addEventListener('DOMContentLoaded', function () {
   if (window.location.pathname.split('?')[0] == "/") {
-
     var videoContent = new VideoContent();
+
     videoContent.loadContent('videos.json');
   }
 });
