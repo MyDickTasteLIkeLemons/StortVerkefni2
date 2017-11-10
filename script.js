@@ -3,7 +3,6 @@ class VideoContent {
     this.url = 'videos.json';
     this.videos = null;
     this.categories = null;
-    this.container = null;
   }
 
   showLoad() {
@@ -121,11 +120,10 @@ class VideoContent {
     str = str.slice(-1);
     return parseInt(str, 10);
   }
+  getVideo() {
 
-  loadContent() {
-    this.getJSON();
   }
-  getJSON() {
+  getJSON(isIndex) {
     const request = new XMLHttpRequest();
 
     this.showLoad();
@@ -134,10 +132,14 @@ class VideoContent {
       this.hideLoad();
       const data = JSON.parse(request.response);
       if (request.status >= 200 && request.status < 400) {
-        console.log(data.videos);
-        [this.categories, this.videos] = [data.categories, data.videos];
-        for (let i = 0; i < this.categories.length; i += 1) {
-          this.displayCategory(i);
+        if (isIndex) {
+          [this.categories, this.videos] = [data.categories, data.videos];
+          for (let i = 0; i < this.categories.length; i += 1) {
+            this.displayCategory(i);
+          }
+        }
+        else {
+          this.getVideo();
         }
       } else {
         this.showError(data.error);
@@ -152,6 +154,9 @@ class VideoContent {
 
 document.addEventListener('DOMContentLoaded', () => {
   const videoContent = new VideoContent();
-
-  videoContent.loadContent('videos.json');
+  if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
+    videoContent.getJSON('videos.json', false);
+  } else {
+    videoContent.getJSON('videos.json', true);
+  }
 });

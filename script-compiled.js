@@ -11,7 +11,6 @@ var VideoContent = function () {
     this.url = 'videos.json';
     this.videos = null;
     this.categories = null;
-    this.container = null;
   }
 
   _createClass(VideoContent, [{
@@ -145,13 +144,11 @@ var VideoContent = function () {
       return parseInt(str, 10);
     }
   }, {
-    key: 'loadContent',
-    value: function loadContent() {
-      this.getJSON();
-    }
+    key: 'getVideo',
+    value: function getVideo() {}
   }, {
     key: 'getJSON',
-    value: function getJSON() {
+    value: function getJSON(isIndex) {
       var _this = this;
 
       var request = new XMLHttpRequest();
@@ -162,13 +159,16 @@ var VideoContent = function () {
         _this.hideLoad();
         var data = JSON.parse(request.response);
         if (request.status >= 200 && request.status < 400) {
-          console.log(data.videos);
-          var _ref = [data.categories, data.videos];
-          _this.categories = _ref[0];
-          _this.videos = _ref[1];
+          if (isIndex) {
+            var _ref = [data.categories, data.videos];
+            _this.categories = _ref[0];
+            _this.videos = _ref[1];
 
-          for (var i = 0; i < _this.categories.length; i += 1) {
-            _this.displayCategory(i);
+            for (var i = 0; i < _this.categories.length; i += 1) {
+              _this.displayCategory(i);
+            }
+          } else {
+            _this.getVideo();
           }
         } else {
           _this.showError(data.error);
@@ -186,8 +186,11 @@ var VideoContent = function () {
 
 document.addEventListener('DOMContentLoaded', function () {
   var videoContent = new VideoContent();
-
-  videoContent.loadContent('videos.json');
+  if (window.location.pathname.split('?')[0] == "/VideoPage.html") {
+    videoContent.getJSON('videos.json', false);
+  } else {
+    videoContent.getJSON('videos.json', true);
+  }
 });
 'use strict';
 
