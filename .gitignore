@@ -5,4 +5,10 @@
 #viljum ekki fylgjast með css skajli
 styles.css
 VideoPlayerScript-compiled.js
+<<<<<<< HEAD
 script-compiled.js
+=======
+script-compiled.js
+package.json
+package-lock.json
+>>>>>>> 15841413de9c82f4034ca58778f1bdbd8d51770f
