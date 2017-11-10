@@ -1,0 +1,64 @@
+.videoContainer {
+  width: 95%;
+  margin: auto;
+  &__header {
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 4vw;
+  }
+
+  &__videoImg {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  &__video {
+    width: 100%;
+    display: flex;
+  }
+
+  &__playOverlay {
+    background-color: rgba(0,0,0, 0.3);
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__playOverlayImage {
+    width: 5%;
+    padding-top: 25%;
+  }
+
+
+  &__menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+  }
+
+  &__menu img {
+    width: 10%;
+    height: 100%;
+    margin-left: 4%;
+    margin-left: 4%;
+  }
+
+}
+
+.backButton {
+  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 4%;
+
+  &__text {
+    color: white;
+    font-weight: bold;
+    font-size: 1.7vw;
+    text-decoration: none;
+  }
+}
