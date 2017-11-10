@@ -34,9 +34,14 @@ main { /* stylelint-disable-line */
   max-width:1000px;
 }
 
+h1{
+  padding-left:0.5em;
+}
+
 @media (max-width: 500px) {
   main { /* stylelint-disable-line */
     max-width:500px;
+	background-color:green;
   }
 }
 
