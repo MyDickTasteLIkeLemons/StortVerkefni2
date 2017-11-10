@@ -18,8 +18,19 @@ html { /* stylelint-disable-line */
   color:#fff;
 }
 
+img { /* stylelint-disable-line */
+  width:100%;
+}
+
+section { /* stylelint-disable-line */
+  padding-top:2em;
+}
+
 main { /* stylelint-disable-line */
   width:100%;
+  display:flex;
+  flex-direction: column;
+  margin:0 auto;
   max-width:1000px;
 }
 

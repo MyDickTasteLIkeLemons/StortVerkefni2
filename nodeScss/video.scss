@@ -1,0 +1,33 @@
+.video_wrapper {
+  width:100%;
+  display:flex;
+  margin:0 auto;
+  
+  &__heading {
+    padding-bottom:1em;
+  }
+  
+  &__video {
+    width:50%;
+	display:flex;
+	flex-direction: column;
+	
+	&__vid_img {
+      width:100%;
+	  padding-left:1em;
+	  padding-right:1em;
+       
+	}
+  }
+
+
+
+
+
+
+
+
+
+
+
+}
