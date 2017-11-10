@@ -155,15 +155,9 @@ class VideoContent {
 document.addEventListener('DOMContentLoaded', () => {
 	 if(window.location.pathname.split('?')[0] == "/"){
   const videoContent = new VideoContent();
-<<<<<<< HEAD
   if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
     videoContent.getJSON('videos.json', false);
   } else {
     videoContent.getJSON('videos.json', true);
   }
-=======
-
-  videoContent.loadContent('videos.json');
-	 }
->>>>>>> 54a77a165f8f93b4c77f3d7c3160621c314d65d6
 });
