@@ -1,5 +1,4 @@
 class Player {
-
   constructor() {
     this.isPlaying = false;
     this.isMute = false;
@@ -22,27 +21,26 @@ class Player {
     this.forwardButton.addEventListener('click', this.forward.bind(this));
     this.backwardButton.addEventListener('click', this.backward.bind(this));
     this.playOverlayButton.addEventListener('click', this.play.bind(this));
-   }
+  }
   load() {
-    //this.video.play();
+    // this.video.play();
   }
 
   play() {
-    if (this.isPlaying){
+    if (this.isPlaying) {
       this.video.pause();
       this.playButton.src = 'img/play.svg';
-      this.playOverlay.style.display = "block";
+      this.playOverlay.style.display = 'block';
     } else {
-        this.video.play();
-        this.playButton.src = 'img/pause.svg';
-        this.playOverlay.style.display = "none";
-
+      this.video.play();
+      this.playButton.src = 'img/pause.svg';
+      this.playOverlay.style.display = 'none';
     }
     this.isPlaying = !this.isPlaying;
   }
 
   mute() {
-    if (this.video.muted){
+    if (this.video.muted) {
       this.video.muted = false;
       this.muteButton.src = 'img/mute.svg';
     } else {
@@ -63,7 +61,6 @@ class Player {
   backward() {
     this.video.currentTime = this.video.currentTime - 3;
   }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
