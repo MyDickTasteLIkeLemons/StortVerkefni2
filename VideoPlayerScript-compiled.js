@@ -34,7 +34,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'load',
     value: function load() {
-      //this.video.play();
+      // this.video.play();
     }
   }, {
     key: 'play',
@@ -42,11 +42,11 @@ var Player = function () {
       if (this.isPlaying) {
         this.video.pause();
         this.playButton.src = 'img/play.svg';
-        this.playOverlay.style.display = "block";
+        this.playOverlay.style.display = 'block';
       } else {
         this.video.play();
         this.playButton.src = 'img/pause.svg';
-        this.playOverlay.style.display = "none";
+        this.playOverlay.style.display = 'none';
       }
       this.isPlaying = !this.isPlaying;
     }
