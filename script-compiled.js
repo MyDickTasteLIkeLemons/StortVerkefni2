@@ -38,12 +38,18 @@ var VideoContent = function () {
       var h = document.createElement('h1');
       h.classList.add('category__header');
       h.innerHTML = this.categories[id].title;
+      var v = document.createElement('div');
+      v.classList.add('videos');
       s.appendChild(h);
 
       for (var i = 0; i < this.categories[id].videos.length; i += 1) {
         var k = this.categories[id].videos[i] - 1;
-        this.displayVideo(k, s);
+        this.displayVideo(k, v);
       }
+      s.appendChild(v);
+      var cs = document.createElement('div');
+      cs.classList.add('content-seperator');
+      s.appendChild(cs);
       container.appendChild(s);
     }
   }, {
@@ -156,6 +162,7 @@ var VideoContent = function () {
         _this.hideLoad();
         var data = JSON.parse(request.response);
         if (request.status >= 200 && request.status < 400) {
+          console.log(data.videos);
           var _ref = [data.categories, data.videos];
           _this.categories = _ref[0];
           _this.videos = _ref[1];
@@ -163,8 +170,9 @@ var VideoContent = function () {
           for (var i = 0; i < _this.categories.length; i += 1) {
             _this.displayCategory(i);
           }
+        } else {
+          _this.showError(data.error);
         }
-        _this.showError(data.error);
       };
       request.onerror = function () {
         _this.showError('Óþekkt villa');

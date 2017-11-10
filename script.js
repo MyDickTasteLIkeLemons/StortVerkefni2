@@ -22,12 +22,18 @@ class VideoContent {
     const h = document.createElement('h1');
     h.classList.add('category__header');
     h.innerHTML = this.categories[id].title;
+    const v = document.createElement('div');
+    v.classList.add('videos');
     s.appendChild(h);
 
     for (let i = 0; i < this.categories[id].videos.length; i += 1) {
       const k = this.categories[id].videos[i] - 1;
-      this.displayVideo(k, s);
+      this.displayVideo(k, v);
     }
+    s.appendChild(v);
+    const cs = document.createElement('div');
+    cs.classList.add('content-seperator');
+    s.appendChild(cs);
     container.appendChild(s);
   }
   displayVideo(id, container) {
@@ -128,12 +134,14 @@ class VideoContent {
       this.hideLoad();
       const data = JSON.parse(request.response);
       if (request.status >= 200 && request.status < 400) {
+        console.log(data.videos);
         [this.categories, this.videos] = [data.categories, data.videos];
         for (let i = 0; i < this.categories.length; i += 1) {
           this.displayCategory(i);
         }
+      } else {
+        this.showError(data.error);
       }
-      this.showError(data.error);
     };
     request.onerror = () => {
       this.showError('Óþekkt villa');
