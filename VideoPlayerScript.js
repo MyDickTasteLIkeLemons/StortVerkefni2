@@ -113,12 +113,12 @@ class Player {
     if (this.isPlaying) {
       this.video.pause();
       this.playButton.src = 'img/play.svg';
-      this.playOverlay.classList.remove('overlayHidden');
+      this.playOverlay.classList.remove('hidden');
       // this.playOverlay.style.display = 'block';
     } else {
       this.video.play();
       this.playButton.src = 'img/pause.svg';
-      this.playOverlay.classList.add('overlayHidden');
+      this.playOverlay.classList.add('hidden');
       // this.playOverlay.style.display = 'none';
     }
     this.isPlaying = !this.isPlaying;

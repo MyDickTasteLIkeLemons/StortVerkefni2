@@ -3,18 +3,22 @@ class VideoContent {
     this.url = 'videos.json';
     this.videos = null;
     this.categories = null;
+    this.message = document.querySelector('.message');
   }
 
   showLoad() {
-    console.log('start loading');
+    this.message.innerHTML = 'Hleð gögnum...';
+    this.message.classList.remove('hidden');
   }
   hideLoad() {
-    console.log('stop loading');
+    this.message.innerHTML = null;
+    this.message.classList.add('hidden');
   }
   showError(e) {
-    console.log('error');
-    console.log(e);
+    this.message.innerHTML = e;
+    this.message.classList.remove('hidden');
   }
+
   displayCategory(id) {
     const container = document.querySelector('main');
     const s = document.createElement('section');
