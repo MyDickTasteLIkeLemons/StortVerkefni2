@@ -2,7 +2,12 @@
   width: 95%;
   margin: auto;
 
-  .overlayHidden {
+  .activeButton:active {
+    border: 5px solid #5b5a5b;
+    border-radius: 0.2em;
+  }
+
+  .hidden {
       display: none;
     }
 
@@ -50,7 +55,7 @@
   &__menu img {
     width: 8%;
     height: 100%;
-    padding-left:1.2em;
+    margin-left:2%;
   }
 
 }
@@ -59,7 +64,6 @@
   text-align: center;
   margin-top: 4%;
   margin-bottom: 4%;
-
   &__text {
     color: white;
     font-weight: bold;
