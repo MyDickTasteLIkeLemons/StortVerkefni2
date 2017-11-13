@@ -121,7 +121,7 @@ class VideoContent {
     return parseInt(str, 10);
   }
   getVideo() {
-
+    return 'test';
   }
   getJSON(isIndex) {
     const request = new XMLHttpRequest();
@@ -137,8 +137,7 @@ class VideoContent {
           for (let i = 0; i < this.categories.length; i += 1) {
             this.displayCategory(i);
           }
-        }
-        else {
+        } else {
           this.getVideo();
         }
       } else {
@@ -152,9 +151,14 @@ class VideoContent {
   }
 }
 
+function onPage(page) {
+  return (window.location.pathname.split('?')[0]).toLowerCase()
+  === (page).toLowerCase();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const videoContent = new VideoContent();
-  if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
+  if (onPage('/VideoPage.html')) {
     videoContent.getJSON(false);
   } else {
     videoContent.getJSON(true);

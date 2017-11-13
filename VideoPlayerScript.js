@@ -16,16 +16,15 @@ class Player {
     this.backwardButton.addEventListener('click', this.backward.bind(this));
   }
   load() {
+    console.log('loading data');
 
-    console.log("loading data");
-
-    const headerText = "Header works";
-    const poster = "/videos/bunny.png";
+    const headerText = 'Header works';
+    const poster = '/videos/bunny.png';
     const source = 'videos/bunny.mp4';
 
     const wrapper = document.querySelector('.videoContainer__wrapper');
 
-    //create header
+    // create header
     const header = document.createElement('h1');
     header.className = 'videoContainer__header';
     const headerNode = document.createTextNode(headerText);
@@ -33,7 +32,7 @@ class Player {
 
     wrapper.appendChild(header);
 
-    //create videoImg
+    // create videoImg
     const videoImg = document.createElement('div');
     videoImg.className = 'videoContainer__videoImg';
 
@@ -43,18 +42,18 @@ class Player {
 
     const videoSource = document.createElement('source');
     videoSource.src = source;
-    videoSource.type = "video/mp4";
+    videoSource.type = 'video/mp4';
 
     video.appendChild(videoSource);
     videoImg.appendChild(video);
 
-    //create playOverlay
+    // create playOverlay
     const playOverlay = document.createElement('div');
-    playOverlay.className = "videoContainer__playOverlay";
+    playOverlay.className = 'videoContainer__playOverlay';
 
     const playOverlayImage = document.createElement('img');
-    playOverlayImage.className = "videoContainer__playOverlayImage";
-    playOverlayImage.src = "img/play.svg";
+    playOverlayImage.className = 'videoContainer__playOverlayImage';
+    playOverlayImage.src = 'img/play.svg';
 
     playOverlay.appendChild(playOverlayImage);
 
@@ -106,11 +105,15 @@ class Player {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-   if(window.location.pathname.split('?')[0] == "/VideoPage.html"){
+function onPage(page) {
+  return (window.location.pathname.split('?')[0]).toLowerCase()
+  === (page).toLowerCase();
+}
 
-  const p = new Player();
-  p.load();
-  console.log("after load call");
+document.addEventListener('DOMContentLoaded', () => {
+  if (onPage('/VideoPage.html')) {
+    const p = new Player();
+    p.load();
+    console.log('after load call');
   }
 });
