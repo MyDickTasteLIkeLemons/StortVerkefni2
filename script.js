@@ -1,9 +1,9 @@
 class VideoContent {
   constructor() {
-    this.url = 'videos.json';
+    this.url = 'vieos.json';
     this.videos = null;
     this.categories = null;
-    this.message = document.querySelector('.message');
+    this.message = null;
   }
 
   showLoad() {
@@ -40,8 +40,8 @@ class VideoContent {
     container.appendChild(s);
   }
   displayVideo(id, container) {
-    const v = document.createElement('div');
-    v.classList.add('video');
+    const video = document.createElement('div');
+    video.classList.add('video');
 
     const a = document.createElement('a');
     a.href = `VideoPage.html?id=${this.videos[id].id}`;
@@ -58,18 +58,25 @@ class VideoContent {
     vd.innerHTML = this.duration(this.videos[id].duration);
     vimg.appendChild(img);
     vimg.appendChild(vd);
+
     const vinfo = document.createElement('div');
     vinfo.classList.add('video__info');
+
     const h = document.createElement('h2');
     h.innerHTML = this.videos[id].title;
+
     const p = document.createElement('p');
     p.innerHTML = this.howLong(this.videos[id].created);
+
     vinfo.appendChild(h);
     vinfo.appendChild(p);
+
     a.appendChild(vimg);
     a.appendChild(vinfo);
-    v.appendChild(a);
-    container.appendChild(v);
+
+    video.appendChild(a);
+
+    container.appendChild(video);
   }
   duration(x) {
     let dur = x;
@@ -130,7 +137,11 @@ class VideoContent {
     str = str.slice(-1);
     return parseInt(str, 10);
   }
+
   getJSON() {
+    this.message = document.createElement('p');
+    document.querySelector('main').append(this.message);
+
     const request = new XMLHttpRequest();
 
     this.showLoad();
@@ -138,12 +149,14 @@ class VideoContent {
     request.onload = () => {
       this.hideLoad();
       const data = JSON.parse(request.response);
+      alert(data.error);
       if (request.status >= 200 && request.status < 400) {
         [this.categories, this.videos] = [data.categories, data.videos];
         for (let i = 0; i < this.categories.length; i += 1) {
           this.displayCategory(i);
         }
       } else {
+        console.log('test');
         this.showError(data.error);
       }
     };
@@ -151,6 +164,14 @@ class VideoContent {
       this.showError('Óþekkt villa');
     };
     request.send();
+  }
+
+  load() {
+    try {
+      this.getJSON();
+    } catch (e) {
+      this.showError(e);
+    }
   }
 }
 
