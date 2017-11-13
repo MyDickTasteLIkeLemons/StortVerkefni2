@@ -1,5 +1,11 @@
 class Player {
-  constructor() {
+  constructor(id) {
+    // videos fylkið er frá 0 til n-1 en ids eru frá 1 til n
+    this.id = id - 1;
+    this.url = 'videos.json';
+    this.videos = null;
+    this.categories = null;
+
     this.isPlaying = false;
     this.isMute = false;
 
@@ -16,12 +22,23 @@ class Player {
     this.backwardButton.addEventListener('click', this.backward.bind(this));
   }
 
+  showLoad() {
+    console.log('start loading');
+  }
+  hideLoad() {
+    console.log('stop loading');
+  }
+  showError(e) {
+    console.log('error');
+    console.log(e);
+  }
+
   loadHTML() {
     console.log('loading data');
 
-    const headerText = 'Header works';
-    const poster = '/videos/bunny.png';
-    const source = 'videos/bunny.mp4';
+    const headerText = this.videos[this.id].title;
+    const img = this.videos[this.id].poster;
+    const source = this.videos[this.id].video;
 
     const wrapper = document.querySelector('.videoContainer__wrapper');
 
@@ -39,7 +56,7 @@ class Player {
 
     const video = document.createElement('video');
     video.className = 'videoContainer__video';
-    video.poster = poster;
+    video.poster = img;
 
     const videoSource = document.createElement('source');
     videoSource.src = source;
@@ -63,25 +80,46 @@ class Player {
     wrapper.appendChild(videoImg);
   }
 
-  load() {
-    this.loadHTML();
-
+  preparePlayer() {
     this.video = document.querySelector('.videoContainer__video');
     this.playOverlay = document.querySelector('.videoContainer__playOverlay');
     this.playOverlayButton = document.querySelector('.videoContainer__playOverlayImage');
-
     this.playOverlayButton.addEventListener('click', this.play.bind(this));
+  }
+
+  load() {
+    const request = new XMLHttpRequest();
+
+    this.showLoad();
+    request.open('GET', this.url, true);
+    request.onload = () => {
+      this.hideLoad();
+      const data = JSON.parse(request.response);
+      if (request.status >= 200 && request.status < 400) {
+        [this.categories, this.videos] = [data.categories, data.videos];
+        this.loadHTML();
+        this.preparePlayer();
+      } else {
+        this.showError(data.error);
+      }
+    };
+    request.onerror = () => {
+      this.showError('Óþekkt villa');
+    };
+    request.send();
   }
 
   play() {
     if (this.isPlaying) {
       this.video.pause();
       this.playButton.src = 'img/play.svg';
-      this.playOverlay.style.display = 'block';
+      this.cassList.remove('overlayHidden');
+      // this.playOverlay.style.display = 'block';
     } else {
       this.video.play();
       this.playButton.src = 'img/pause.svg';
-      this.playOverlay.style.display = 'none';
+      this.cassList.add('overlayHidden');
+      // this.playOverlay.style.display = 'none';
     }
     this.isPlaying = !this.isPlaying;
   }
@@ -111,13 +149,13 @@ class Player {
 }
 
 function onPage(page) {
-  return (window.location.pathname.split('?')[0]).toLowerCase()
-  === (page).toLowerCase();
+  return window.location.pathname.toLowerCase() === (page).toLowerCase();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   if (onPage('/VideoPage.html')) {
-    const p = new Player();
+    const id = window.location.href.split('?')[1].split('=')[1];
+    const p = new Player(id);
     p.load();
     console.log('after load call');
   }

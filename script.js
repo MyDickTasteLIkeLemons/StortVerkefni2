@@ -126,10 +126,7 @@ class VideoContent {
     str = str.slice(-1);
     return parseInt(str, 10);
   }
-  getVideo() {
-    return 'test';
-  }
-  getJSON(isIndex) {
+  getJSON() {
     const request = new XMLHttpRequest();
 
     this.showLoad();
@@ -138,13 +135,9 @@ class VideoContent {
       this.hideLoad();
       const data = JSON.parse(request.response);
       if (request.status >= 200 && request.status < 400) {
-        if (isIndex) {
-          [this.categories, this.videos] = [data.categories, data.videos];
-          for (let i = 0; i < this.categories.length; i += 1) {
-            this.displayCategory(i);
-          }
-        } else {
-          this.getVideo();
+        [this.categories, this.videos] = [data.categories, data.videos];
+        for (let i = 0; i < this.categories.length; i += 1) {
+          this.displayCategory(i);
         }
       } else {
         this.showError(data.error);
@@ -158,15 +151,12 @@ class VideoContent {
 }
 
 function onPage(page) {
-  return (window.location.pathname.split('?')[0]).toLowerCase()
-  === (page).toLowerCase();
+  return window.location.pathname.toLowerCase() === (page).toLowerCase();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const videoContent = new VideoContent();
-  if (onPage('/VideoPage.html')) {
-    videoContent.getJSON(false);
-  } else {
-    videoContent.getJSON(true);
+  if (!onPage('/VideoPage.html')) {
+    const videoContent = new VideoContent();
+    videoContent.getJSON();
   }
 });
