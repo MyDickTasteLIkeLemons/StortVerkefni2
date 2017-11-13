@@ -1,11 +1,13 @@
 .videoContainer {
   width: 95%;
   margin: auto;
+  height:50%;
+
   &__header {
     text-align: center;
     margin-top: 3%;
     margin-bottom: 3%;
-    font-size: 4vw;
+    font-size: 2.5em;
   }
 
   &__videoImg {
@@ -27,6 +29,11 @@
     text-align: center;
     width: 100%;
     height: 100%;
+	display: block;
+
+    .overlayHidden {
+      display: none;
+    }
   }
 
   &__playOverlayImage {
@@ -42,10 +49,9 @@
   }
 
   &__menu img {
-    width: 10%;
+    width: 8%;
     height: 100%;
-    margin-left: 4%;
-    margin-left: 4%;
+    padding-left:1.2em;
   }
 
 }
@@ -58,7 +64,7 @@
   &__text {
     color: white;
     font-weight: bold;
-    font-size: 1.7vw;
+    font-size: 1.5em;
     text-decoration: none;
   }
 }

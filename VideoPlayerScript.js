@@ -19,7 +19,7 @@ class Player {
   loadHTML() {
     console.log('loading data');
 
-    const headerText = 'Header works';
+    const headerText = 'Big Bunny';
     const poster = '/videos/bunny.png';
     const source = 'videos/bunny.mp4';
 

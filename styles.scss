@@ -2,7 +2,6 @@
 
 html { /* stylelint-disable-line */
   box-sizing: border-box;
-  text-decoration: none;  
 }
 
 *, *:before, *:after { /* stylelint-disable-line */
@@ -58,4 +57,3 @@ h1{ /* stylelint-disable-line */
 }
 @import "nodeScss/video";
 @import "nodeScss/VideoContainer";
-@import "nodeScss/videoPlayer_general";
