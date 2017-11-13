@@ -15,7 +15,8 @@ class Player {
     this.forwardButton.addEventListener('click', this.forward.bind(this));
     this.backwardButton.addEventListener('click', this.backward.bind(this));
   }
-  load() {
+
+  loadHTML() {
     console.log('loading data');
 
     const headerText = 'Header works';
@@ -60,6 +61,10 @@ class Player {
     videoImg.appendChild(playOverlay);
 
     wrapper.appendChild(videoImg);
+  }
+
+  load() {
+    this.loadHTML();
 
     this.video = document.querySelector('.videoContainer__video');
     this.playOverlay = document.querySelector('.videoContainer__playOverlay');

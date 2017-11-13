@@ -38,11 +38,17 @@ class VideoContent {
   displayVideo(id, container) {
     const v = document.createElement('div');
     v.classList.add('video');
-    const vimg = document.createElement('div');
+
+    const a = document.createElement('a');
+    a.href = `VideoPage.html?id=${this.videos[id].id}`;
+
+    const vimg = document.createElement('a');
     vimg.classList.add('video__img');
+
     const img = document.createElement('img');
     img.src = this.videos[id].poster;
     img.alt = this.videos[id].title;
+
     const vd = document.createElement('div');
     vd.classList.add('video__duration');
     vd.innerHTML = this.duration(this.videos[id].duration);
@@ -56,8 +62,9 @@ class VideoContent {
     p.innerHTML = this.howLong(this.videos[id].created);
     vinfo.appendChild(h);
     vinfo.appendChild(p);
-    v.appendChild(vimg);
-    v.appendChild(vinfo);
+    a.appendChild(vimg);
+    a.appendChild(vinfo);
+    v.appendChild(a);
     container.appendChild(v);
   }
   duration(x) {
@@ -72,7 +79,6 @@ class VideoContent {
     return `${mins}:${secs}`;
   }
   howLong(x) {
-    const d = new Date();
     let s = (Date.now() - x) / 1000;
     const years = Math.floor(s / (365 * 24 * 60 * 60));
     s %= (365 * 24 * 60 * 60);
