@@ -1,6 +1,6 @@
 class VideoContent {
   constructor() {
-    this.url = 'vieos.json';
+    this.url = 'vidos.json';
     this.videos = null;
     this.categories = null;
     this.message = null;
@@ -139,9 +139,6 @@ class VideoContent {
   }
 
   getJSON() {
-    this.message = document.createElement('p');
-    document.querySelector('main').append(this.message);
-
     const request = new XMLHttpRequest();
 
     this.showLoad();
@@ -167,6 +164,8 @@ class VideoContent {
   }
 
   load() {
+    this.message = document.createElement('p');
+    document.querySelector('main').append(this.message);
     try {
       this.getJSON();
     } catch (e) {
@@ -182,6 +181,6 @@ function onPage(page) {
 document.addEventListener('DOMContentLoaded', () => {
   if (!onPage('/VideoPage.html')) {
     const videoContent = new VideoContent();
-    videoContent.getJSON();
+    videoContent.load();
   }
 });
