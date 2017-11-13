@@ -55,5 +55,10 @@ h1{ /* stylelint-disable-line */
 .category__headder {
   font-size: 2.1em;
 }
+
+.error {
+  margin: 0 auto;
+}
+
 @import "nodeScss/video";
 @import "nodeScss/VideoContainer";
