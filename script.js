@@ -1,6 +1,6 @@
 class VideoContent {
   constructor() {
-    this.url = 'vidos.json';
+    this.url = 'videos.json';
     this.videos = null;
     this.categories = null;
     this.message = null;
@@ -145,33 +145,33 @@ class VideoContent {
     request.open('GET', this.url, true);
     request.onload = () => {
       this.hideLoad();
-      const data = JSON.parse(request.response);
-      alert(data.error);
       if (request.status >= 200 && request.status < 400) {
+		const data = JSON.parse(request.response);
         [this.categories, this.videos] = [data.categories, data.videos];
         for (let i = 0; i < this.categories.length; i += 1) {
           this.displayCategory(i);
         }
       } else {
-        console.log('test');
-        this.showError(data.error);
+        this.showError('Villa! '+request.status);
       }
     };
     request.onerror = () => {
       this.showError('Óþekkt villa');
     };
+	try {
     request.send();
+	}
+	catch (e) {
+      this.showError(e);
+    }
   }
 
   load() {
     this.message = document.createElement('p');
     this.message.classList.add('message');
     document.querySelector('main').append(this.message);
-    try {
-      this.getJSON();
-    } catch (e) {
-      this.showError(e);
-    }
+	this.getJSON();
+
   }
 }
 
