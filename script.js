@@ -44,7 +44,7 @@ class VideoContent {
     video.classList.add('video');
 
     const a = document.createElement('a');
-    a.href = `VideoPage.html?id=${this.videos[id].id}`;
+    a.href = `videopage.html?id=${this.videos[id].id}`;
 
     const vimg = document.createElement('a');
     vimg.classList.add('video__img');
