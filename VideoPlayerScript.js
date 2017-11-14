@@ -1,7 +1,7 @@
 class Player {
-  constructor(id) {
+  constructor() {
     // videos fylkið er frá 0 til n-1 en ids eru frá 1 til n
-    this.id = id - 1;
+    this.id = null;
     this.url = 'videos.json';
     this.videos = null;
     this.categories = null;
@@ -14,6 +14,7 @@ class Player {
     this.fullscreenButton = document.querySelector('.fullscreenButton');
     this.forwardButton = document.querySelector('.forwardButton');
     this.backwardButton = document.querySelector('.backwardButton');
+	this.videoContainer = document.querySelector('.videoContainer');
 
     this.playButton.addEventListener('click', this.play.bind(this));
     this.muteButton.addEventListener('click', this.mute.bind(this));
@@ -23,19 +24,23 @@ class Player {
   }
 
   showLoad() {
-    console.log('start loading');
+    this.message.innerHTML = 'Hleð gögnum...';
+    this.videoContainer.classList.add('hidden');
   }
   hideLoad() {
-    console.log('stop loading');
+    this.message.innerHTML = null;
+    this.videoContainer.classList.remove('hidden');
   }
   showError(e) {
-    console.log('error');
-    console.log(e);
+    this.message.innerHTML = e;
+	this.videoContainer.classList.add('hidden');
+    this.message.classList.remove('hidden');
   }
 
   loadHTML() {
+	
     console.log('loading data');
-
+	console.log(this.id);
     const headerText = this.videos[this.id].title;
     const img = this.videos[this.id].poster;
     const source = this.videos[this.id].video;
@@ -88,25 +93,40 @@ class Player {
   }
 
   load() {
+	this.message = document.createElement('p');
+    this.message.classList.add('message');
+    document.querySelector('main').append(this.message);
+	this.showLoad();
+	if(window.location.href.split('?').length === 2 ){	
+    
+	const index = window.location.href.split('?')[1].split('=')[1]; 
+	this.id = index-1;
     const request = new XMLHttpRequest();
-
-    this.showLoad();
     request.open('GET', this.url, true);
     request.onload = () => {
-      this.hideLoad();
+     this.hideLoad();
       const data = JSON.parse(request.response);
       if (request.status >= 200 && request.status < 400) {
         [this.categories, this.videos] = [data.categories, data.videos];
+		if(this.id < this.videos.length && this.id >= 0 ){			
         this.loadHTML();
         this.preparePlayer();
+		} else {
+			this.showError('Ólöglegt id gefið');
+		}
       } else {
-        this.showError(data.error);
+        this.showError('villa! '+data.error);
       }
     };
     request.onerror = () => {
       this.showError('Óþekkt villa');
     };
     request.send();
+	} 
+	else {
+		this.showError('Ekkert Id var gefið');
+	}
+	return;
   }
 
   play() {
@@ -148,15 +168,11 @@ class Player {
   }
 }
 
-function onPage(page) {
-  return window.location.pathname.toLowerCase() === (page).toLowerCase();
-}
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (onPage('/VideoPage.html')) {
-    const id = window.location.href.split('?')[1].split('=')[1];
-    const p = new Player(id);
+	
+  if (onPage('myndband')) {
+    const p = new Player();
     p.load();
-    console.log('after load call');
   }
 });

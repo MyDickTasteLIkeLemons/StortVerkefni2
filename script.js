@@ -175,12 +175,12 @@ class VideoContent {
   }
 }
 
-function onPage(page) {
-  return window.location.pathname.toLowerCase() === (page).toLowerCase();
+function onPage(id) {
+  return document.getElementById(id) != null;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (!onPage('/VideoPage.html')) {
+  if (onPage('myndbandaleigan')){
     const videoContent = new VideoContent();
     videoContent.load();
   }
