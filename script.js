@@ -165,6 +165,7 @@ class VideoContent {
 
   load() {
     this.message = document.createElement('p');
+    this.message.classList.add('message');
     document.querySelector('main').append(this.message);
     try {
       this.getJSON();
