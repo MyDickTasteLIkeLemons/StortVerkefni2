@@ -14,7 +14,7 @@ class Player {
     this.fullscreenButton = document.querySelector('.fullscreenButton');
     this.forwardButton = document.querySelector('.forwardButton');
     this.backwardButton = document.querySelector('.backwardButton');
-	this.videoContainer = document.querySelector('.videoContainer');
+    this.videoContainer = document.querySelector('.videoContainer');
 
     this.playButton.addEventListener('click', this.play.bind(this));
     this.muteButton.addEventListener('click', this.mute.bind(this));
@@ -33,14 +33,11 @@ class Player {
   }
   showError(e) {
     this.message.innerHTML = e;
-	this.videoContainer.classList.add('hidden');
+    this.videoContainer.classList.add('hidden');
     this.message.classList.remove('hidden');
   }
 
   loadHTML() {
-	
-    console.log('loading data');
-	console.log(this.id);
     const headerText = this.videos[this.id].title;
     const img = this.videos[this.id].poster;
     const source = this.videos[this.id].video;
@@ -93,40 +90,37 @@ class Player {
   }
 
   load() {
-	this.message = document.createElement('p');
+    this.message = document.createElement('p');
     this.message.classList.add('message');
     document.querySelector('main').append(this.message);
-	this.showLoad();
-	if(window.location.href.split('?').length === 2 ){	
-    
-	const index = window.location.href.split('?')[1].split('=')[1]; 
-	this.id = index-1;
-    const request = new XMLHttpRequest();
-    request.open('GET', this.url, true);
-    request.onload = () => {
-     this.hideLoad();
-      const data = JSON.parse(request.response);
-      if (request.status >= 200 && request.status < 400) {
-        [this.categories, this.videos] = [data.categories, data.videos];
-		if(this.id < this.videos.length && this.id >= 0 ){			
-        this.loadHTML();
-        this.preparePlayer();
-		} else {
-			this.showError('Ólöglegt id gefið');
-		}
-      } else {
-        this.showError('villa! '+data.error);
-      }
-    };
-    request.onerror = () => {
-      this.showError('Óþekkt villa');
-    };
-    request.send();
-	} 
-	else {
-		this.showError('Ekkert Id var gefið');
-	}
-	return;
+    this.showLoad();
+    if (window.location.href.split('?').length === 2) {
+      const index = window.location.href.split('?')[1].split('=')[1];
+      this.id = index - 1;
+      const request = new XMLHttpRequest();
+      request.open('GET', this.url, true);
+      request.onload = () => {
+        this.hideLoad();
+        const data = JSON.parse(request.response);
+        if (request.status >= 200 && request.status < 400) {
+          [this.categories, this.videos] = [data.categories, data.videos];
+          if (this.id < this.videos.length && this.id >= 0) {
+            this.loadHTML();
+            this.preparePlayer();
+          } else {
+            this.showError('Ólöglegt id gefið');
+          }
+        } else {
+          this.showError(`Villa! ${data.error}`);
+        }
+      };
+      request.onerror = () => {
+        this.showError('Óþekkt villa');
+      };
+      request.send();
+    } else {
+      this.showError('Ekkert Id var gefið');
+    }
   }
 
   play() {
@@ -168,10 +162,12 @@ class Player {
   }
 }
 
+function onVideo() {
+  return document.getElementById('myndband') != null;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-	
-  if (onPage('myndband')) {
+  if (onVideo()) {
     const p = new Player();
     p.load();
   }

@@ -146,22 +146,21 @@ class VideoContent {
     request.onload = () => {
       this.hideLoad();
       if (request.status >= 200 && request.status < 400) {
-		const data = JSON.parse(request.response);
+        const data = JSON.parse(request.response);
         [this.categories, this.videos] = [data.categories, data.videos];
         for (let i = 0; i < this.categories.length; i += 1) {
           this.displayCategory(i);
         }
       } else {
-        this.showError('Villa! '+request.status);
+        this.showError(`Villa! ${request.status}`);
       }
     };
     request.onerror = () => {
       this.showError('Óþekkt villa');
     };
-	try {
-    request.send();
-	}
-	catch (e) {
+    try {
+      request.send();
+    } catch (e) {
       this.showError(e);
     }
   }
@@ -170,17 +169,16 @@ class VideoContent {
     this.message = document.createElement('p');
     this.message.classList.add('message');
     document.querySelector('main').append(this.message);
-	this.getJSON();
-
+    this.getJSON();
   }
 }
 
-function onPage(id) {
-  return document.getElementById(id) != null;
+function onIndex() {
+  return document.getElementById('myndbandaleigan') != null;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (onPage('myndbandaleigan')){
+  if (onIndex()) {
     const videoContent = new VideoContent();
     videoContent.load();
   }

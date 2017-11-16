@@ -58,12 +58,12 @@ h1{ /* stylelint-disable-line */
 }
 
 .message {
-  margin:0 auto;
   padding-top: 40vh;
+  margin: 0 auto;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 @import "nodeScss/video";
